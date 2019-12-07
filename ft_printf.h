@@ -46,5 +46,7 @@ int get_spf(int pos, char* str);
 void get_ob(char *str, t_list **ob);
 void    ft_printf(char *str, ...);
 char	*ft_strdup(const char *s1);
+char *ft_itoa_long16(long n);
+int		ft_isdigit(int c);
 
 #endif

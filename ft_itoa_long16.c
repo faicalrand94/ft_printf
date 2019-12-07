@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_16.c                                       :+:      :+:    :+:   */
+/*   ft_itoa_long16.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 15:20:22 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/01 15:20:25 by fbouibao         ###   ########.fr       */
+/*   Created: 2019/12/01 17:56:08 by fbouibao          #+#    #+#             */
+/*   Updated: 2019/12/01 17:56:11 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static char *ft_i16(int *mod, int n, int i)
   return (str);
 }
 
-char *ft_itoa_16(size_t n)
+char *ft_itoa_long16(long n)
 {
   int i = 0, j = 0, *mod;
-  size_t div;
+  long div;
 
   div = n;
   while (div >= 16)

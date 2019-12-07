@@ -24,8 +24,8 @@ void get_ob(char *str, t_list **ob)
     {
       if ((str[i + 1] == '%' || str[i + 1] == '\0') && str[i] != '%')
         ft_lstadd_back(ob, l_lstnew(ft_substr(str, start, i - start + 1), strdup("\0"), strdup("\0")));
-      if (str[i + 1] == '%' || str[i] == '%')
-      {
+      // if (str[i + 1] == '%' || str[i] == '%')
+      // {
         if (str[i] == '%')
         {
             if ((r_sp = get_spf(i + 1, str)) != 0)
@@ -35,7 +35,7 @@ void get_ob(char *str, t_list **ob)
               start = r_sp + 1;
             }
         }
-        else  if (str[i + 1] == '%')
+        /*else  if (str[i + 1] == '%')
         {
           if ((r_sp = get_spf(i + 2, str)) != 0)
           {
@@ -43,8 +43,8 @@ void get_ob(char *str, t_list **ob)
             i = r_sp;
             start = r_sp + 1;
           }
-        }
-      }
+        }*/
+      // }
     }
     i++;
   }

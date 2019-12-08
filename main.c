@@ -7,8 +7,8 @@ int main()
   // int a = 3648;
   
 //printf("\n\nhello evreybody i'm %s %s i have %d",fname, lname, a);
-ft_printf("|%*.*d|\n", -16, 3, 12);
-   printf("|%*.*d|\n", -16,  3, 12);
+   ft_printf("|%0*.*d|\n", -6, 3, -32);
+   printf("|%0*.*d|\n", -6, 3,  -32);
 
 //printf("%p\n",&a);
 

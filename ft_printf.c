@@ -108,8 +108,11 @@ char cut_flg(char *flgs, int *i)
         (*i)++;
     }
   else if (flgs[(*i)] == '0')
-    while (flgs[++(*i)] == '0')
-        flg = '0'; 
+    while (flgs[(*i)] == '0')
+    {
+        flg = '0';
+        (*i)++;
+    }
   else 
     flg = '\0';
   return (flg);
@@ -150,8 +153,9 @@ char *cut_width(va_list ap, char *flgs, int *i, char *flg)
 char *cut_prec(va_list ap, char *flgs, int *i)
 {
   int start;
-  char *prec = NULL;
+  char *prec;
 
+  prec = ft_strdup("0");
   if (flgs[(*i)] == '.')
   {
     (*i)++;
@@ -168,12 +172,30 @@ char *cut_prec(va_list ap, char *flgs, int *i)
       prec = ft_substr(flgs, start, (*i) - start );  
     }  
   }
-  else
-    prec = ft_strdup("\0");
+  else if (flgs[(*i)] != '.')
+    prec = ft_strdup("-1");
   return (prec);
 }
 
+char  *neg_nbr(char *str)
+{
+  int i;
+  int pos;
 
+  pos = 0;
+  i = -1;
+  while (str[++i] != '\0')
+    if (str[i] == '-')
+    {
+      pos = i;
+      break;
+    }
+  if (pos == 0)
+    return (str);
+  str[pos] = '0';
+  str[0] = '-';
+  return (str);
+}
 
 void str_spf_d(va_list ap, t_list *tmp)
 {
@@ -198,6 +220,11 @@ void str_spf_d(va_list ap, t_list *tmp)
   prec = cut_prec(ap, flgs, &i);
 
   val = ft_itoa(va_arg(ap, int));
+
+  
+  // width
+
+
   if (width != '\0')
   {
     
@@ -206,13 +233,12 @@ void str_spf_d(va_list ap, t_list *tmp)
     else
       tmp->str = malloc(atoi(width) + 1);
   }
+
   if (flg == '0' && width != '\0')
     memset(tmp->str, '0', atoi(width));
   else if (width != '\0')
     memset(tmp->str, ' ', atoi(width));
-  
-  
-  
+
   i = atoi(width) - 1;
   j = ft_strlen(val) - 1;
   if ((int)ft_strlen(val) >= atoi(width))
@@ -237,6 +263,13 @@ void str_spf_d(va_list ap, t_list *tmp)
       tmp->str[i--] = val[j];
       j--;
     }
+if (atoi(val) < 0)
+  tmp->str = neg_nbr(tmp->str);
+//end width
+
+
+// prec
+
 if (val[0] == '0' && atoi(prec) == 0)
 {
   i = atoi(width);
@@ -294,6 +327,8 @@ else if (atoi(prec) >= 0)
       tmp->str[--i] = val[j];
     }
   }
+
+// end prec
 }
 
 

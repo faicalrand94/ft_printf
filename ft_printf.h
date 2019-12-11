@@ -48,5 +48,12 @@ void    ft_printf(char *str, ...);
 char	*ft_strdup(const char *s1);
 char *ft_itoa_long16(long n);
 int		ft_isdigit(int c);
+void str_spf_d(va_list ap, t_list *tmp);
+char *get_s_p(char *val, char *prec, int a);
+char  *neg_nbr(char *str);
+char *cut_prec(va_list ap, char *flgs, int *i);
+char *cut_width(va_list ap, char *flgs, int *i, char *flg);
+char cut_flg(char *flgs, int *i);
+void str_spf_s(va_list ap, t_list *tmp);
 
 #endif

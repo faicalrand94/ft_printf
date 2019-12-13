@@ -58,7 +58,7 @@ static	void	ft_rstr(char *str, long l, int cpt)
 		}
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long n)
 {
 	long	l;
 	char	*str;

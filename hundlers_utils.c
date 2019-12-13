@@ -60,7 +60,7 @@ char *cut_width(va_list ap, char *flgs, int *i, char *flg)
     width = ft_substr(flgs, start, (*i) - start );  
   }
   else
-    width = ft_strdup("\0");
+    width = ft_strdup("-1");
 
     return (width);
 }
@@ -112,14 +112,14 @@ char  *neg_nbr(char *str)
   return (str);
 }
 
-char *get_s_p(char *val, char *prec, int a)
+char *get_s_p(char *val, char *prec)
 {
   char *str_c;
   int i;
   int j;
 
   str_c = NULL;
-  if (atoi(val) > 0 || a == 0)
+  if (atoi(val) > 0)
   {
     str_c = malloc(atoi(prec) + 1);
     str_c[atoi(prec)] = '\0';
@@ -131,17 +131,32 @@ char *get_s_p(char *val, char *prec, int a)
     str_c[atoi(prec) + 1] = '\0';
     i = atoi(prec) + 1;
   }
-    if (a == 1)
         while (--i >= 0)
             str_c[i] = '0';
-    else if (a == 0)
-        while (--i >= 0)
-            str_c[i] = ' ';
-  i = (atoi(val) > 0 || a == 0) ? atoi(prec) : atoi(prec) + 1;
+  i = (atoi(val) > 0) ? atoi(prec) : atoi(prec) + 1;
   j = ft_strlen(val); 
   while (--j >= 0)
     str_c[--i] = val[j];
     if (atoi(val) < 0)
       str_c = neg_nbr(str_c);
+  return (str_c);
+}
+
+char *get_s_p_u(char *val, char *prec)
+{
+  char *str_c;
+  int i;
+  int j;
+
+  str_c = NULL;
+  str_c = malloc(atoi(prec) + 1);
+  str_c[atoi(prec)] = '\0';
+  i = atoi(prec);
+  while (--i >= 0)
+      str_c[i] = '0';
+  i = atoi(prec);
+  j = ft_strlen(val); 
+  while (--j >= 0)
+    str_c[--i] = val[j];
   return (str_c);
 }

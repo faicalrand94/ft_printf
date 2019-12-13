@@ -21,17 +21,18 @@ static char hex_chr(int i)
   return (i + '0');
 }
 
-static char *ft_i16(int *mod, int n, int i)
+static char *ft_i16(int *mod,unsigned int div, int i)
 {
   char *str;
   int j;
   int k;
   
-  k = 0;
+  
+  k = (div > 0) ? div : -1 * div;
   j = 0;
   str = malloc(sizeof(char) * (i + 2));
   str[i + 1] = '\0';
-  str[j++] = hex_chr(n);
+  str[j++] = hex_chr(k);
   k = i - 1;
   while (i--)
   {
@@ -43,10 +44,10 @@ static char *ft_i16(int *mod, int n, int i)
   return (str);
 }
 
-char *ft_itoa_long16(long n)
+char *ft_itoa_int16(unsigned int n)
 {
   int i = 0, j = 0, *mod;
-  long div;
+  unsigned int div;
 
   div = n;
   while (div >= 16)
@@ -56,13 +57,13 @@ char *ft_itoa_long16(long n)
   }
   mod = malloc(sizeof(int) * i);
   
-  
-  while (n >= 16)
+  div = (n > 0) ? n : -1 * n;
+  while (div >= 16)
   {
-    mod[j] = n % 16;
-    n = n / 16;
+    mod[j] = div % 16;
+    div = div / 16;
     j++;
   }
  
-  return (ft_i16(mod, n, i));
+  return (ft_i16(mod, div, i));
 }

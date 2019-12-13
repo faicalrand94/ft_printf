@@ -122,13 +122,25 @@ void    ft_printf(char *str, ...)
       str_spf_d(ap, tmp);
     }
     else if (tmp->spfx == 'u')
-      tmp->str = ft_itoa(va_arg(ap, unsigned int));
+    {
+      str_spf_u(ap, tmp);
+    }
     else if (tmp->spfx == 'p')
-      tmp->str = ft_itoa_16(va_arg(ap, unsigned long long));
+    {
+      str_spf_p(ap, tmp);
+    }
+      //tmp->str = ft_itoa_16(va_arg(ap, size_t));
     else if (tmp->spfx == 'x')
-      tmp->str = ft_itoa_long16(va_arg(ap, long));
+    {
+      str_spf_x(ap, tmp);
+    }
+      //tmp->str = ft_itoa_long16(va_arg(ap, long));
     else if (tmp->spfx == 'X')
-      tmp->str = to_up(ft_itoa_long16(va_arg(ap, long)));  
+    {
+      str_spf_x(ap, tmp);
+      tmp->str = to_up(tmp->str);
+    }
+      // tmp->str = to_up(ft_itoa_long16(va_arg(ap, long)));  
     else if (tmp->spfx == '%')
       tmp->str = strdup("%");
     tmp = tmp->next;

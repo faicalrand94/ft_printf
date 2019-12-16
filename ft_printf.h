@@ -52,12 +52,13 @@ void str_spf_d(va_list ap, t_list *tmp);
 void str_spf_u(va_list ap, t_list *tmp);
 void str_spf_x(va_list ap, t_list *tmp);
 void str_spf_p(va_list ap, t_list *tmp);
-char *get_s_p(char *val, char *prec);
+char *get_s_p(char *val, int prec);
 char  *neg_nbr(char *str);
-char *cut_prec(va_list ap, char *flgs, int *i);
-char *cut_width(va_list ap, char *flgs, int *i, char *flg);
+int		cut_prec(va_list ap, char *flgs, int *i);
+int		cut_width(va_list ap, char *flgs, int *i, char *flg);
 char cut_flg(char *flgs, int *i);
 void str_spf_s(va_list ap, t_list *tmp);
-char *get_s_p_u(char *val, char *prec);
+char *get_s_p_u(char *val, int prec);
+void	*ft_memset(void *str, int c, size_t n);
 
 #endif

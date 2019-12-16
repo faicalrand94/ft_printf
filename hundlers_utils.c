@@ -34,7 +34,7 @@ char cut_flg(char *flgs, int *i)
 }
 
 
-char *cut_width(va_list ap, char *flgs, int *i, char *flg)
+int cut_width(va_list ap, char *flgs, int *i, char *flg)
 {
   int start;
   char *width;
@@ -62,10 +62,10 @@ char *cut_width(va_list ap, char *flgs, int *i, char *flg)
   else
     width = ft_strdup("-1");
 
-    return (width);
+    return (ft_atoi(width));
 }
 
-char *cut_prec(va_list ap, char *flgs, int *i)
+int cut_prec(va_list ap, char *flgs, int *i)
 {
   int start;
   char *prec;
@@ -89,7 +89,7 @@ char *cut_prec(va_list ap, char *flgs, int *i)
   }
   else if (flgs[(*i)] != '.')
     prec = ft_strdup("-1");
-  return (prec);
+  return (ft_atoi(prec));
 }
 
 char  *neg_nbr(char *str)
@@ -112,7 +112,7 @@ char  *neg_nbr(char *str)
   return (str);
 }
 
-char *get_s_p(char *val, char *prec)
+char *get_s_p(char *val, int prec)
 {
   char *str_c;
   int i;
@@ -121,19 +121,19 @@ char *get_s_p(char *val, char *prec)
   str_c = NULL;
   if (atoi(val) > 0)
   {
-    str_c = malloc(atoi(prec) + 1);
-    str_c[atoi(prec)] = '\0';
-    i = atoi(prec);
+    str_c = malloc(prec + 1);
+    str_c[prec] = '\0';
+    i = prec;
   }
   else
   {
-    str_c = malloc(atoi(prec) + 2);
-    str_c[atoi(prec) + 1] = '\0';
-    i = atoi(prec) + 1;
+    str_c = malloc(prec + 2);
+    str_c[prec + 1] = '\0';
+    i = prec + 1;
   }
         while (--i >= 0)
             str_c[i] = '0';
-  i = (atoi(val) > 0) ? atoi(prec) : atoi(prec) + 1;
+  i = (atoi(val) > 0) ? prec : prec + 1;
   j = ft_strlen(val); 
   while (--j >= 0)
     str_c[--i] = val[j];
@@ -142,19 +142,19 @@ char *get_s_p(char *val, char *prec)
   return (str_c);
 }
 
-char *get_s_p_u(char *val, char *prec)
+char *get_s_p_u(char *val, int prec)
 {
   char *str_c;
   int i;
   int j;
 
   str_c = NULL;
-  str_c = malloc(atoi(prec) + 1);
-  str_c[atoi(prec)] = '\0';
-  i = atoi(prec);
+  str_c = malloc(prec + 1);
+  str_c[prec] = '\0';
+  i = prec;
   while (--i >= 0)
       str_c[i] = '0';
-  i = atoi(prec);
+  i = prec;
   j = ft_strlen(val); 
   while (--j >= 0)
     str_c[--i] = val[j];

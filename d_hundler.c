@@ -16,11 +16,12 @@ void str_spf_d(va_list ap, t_list *tmp)
 {
   char *flgs;
   char flg;
-  char *width;
+  int width;
   char *val;
-  char *prec;
+  int prec;
   char *str_c;
   int i = -1, j;
+  int val_i;
 
 
   flgs = tmp->flg;
@@ -34,31 +35,32 @@ void str_spf_d(va_list ap, t_list *tmp)
   width = cut_width(ap, flgs, &i, &flg);
   prec = cut_prec(ap, flgs, &i);
 
-  val = ft_itoa(va_arg(ap, int));
+  val_i = va_arg(ap, int);
+  val = ft_itoa(val_i);
 
   tmp->str = ft_strdup(val);
   // width
 
 
-if (atoi(width) != -1)
+if (width != -1)
 {
     
-  if ((int)ft_strlen(val) >= atoi(width))
+  if ((int)ft_strlen(val) >= width)
   {
     tmp->str = malloc(ft_strlen(val) + 1);
     tmp->str[ft_strlen(val)] = '\0';
   }
   else
   {
-    tmp->str = malloc(atoi(width) + 1);
-    tmp->str[atoi(width)] = '\0';
+    tmp->str = malloc(width + 1);
+    tmp->str[width] = '\0';
   }
 
-    (flg == '0') ? memset(tmp->str, '0', atoi(width)) : memset(tmp->str, ' ', atoi(width));
+    (flg == '0') ? memset(tmp->str, '0', width) : memset(tmp->str, ' ', width);
 
-  i = atoi(width) - 1;
+  i = width - 1;
   j = ft_strlen(val) - 1;
-  if ((int)ft_strlen(val) >= atoi(width))
+  if ((int)ft_strlen(val) >= width)
     while (j >= 0)
     {
       tmp->str[j] = val[j];
@@ -80,7 +82,7 @@ if (atoi(width) != -1)
       tmp->str[i--] = val[j];
       j--;
     }
-  if (atoi(val) < 0)
+  if (val_i < 0)
     tmp->str = neg_nbr(tmp->str);
 }
 
@@ -90,49 +92,49 @@ if (atoi(width) != -1)
 
 // prec
 
-if (val[0] == '0' && atoi(prec) == 0)
+if (val[0] == '0' && prec == 0)
 {
-  i = atoi(width);
+  i = width;
   while (--i >= 0)
       tmp->str[i] = ' ';
 }
-else if (atoi(prec) >= 0)
+else if (prec >= 0)
 {
-  if ((int)ft_strlen(val) > atoi(prec))
+  if ((int)ft_strlen(val) > prec)
   {
     i = -1;
     while (tmp->str[++i] == '0' || tmp->str[i] == '-')
       tmp->str[i] = ' ';
-    if (atoi(val) < 0)
+    if (val_i < 0)
       tmp->str[--i] = '-';
   }
-  else if (flg == '-' && atoi(width) > atoi(prec))
+  else if (flg == '-' && width > prec)
   {
-    i = atoi(width);
+    i = width;
     while (--i >= 0)
         tmp->str[i] = ' ';
     str_c = get_s_p(val, prec);
     i = -1;
-    j = (atoi(val) > 0) ? atoi(prec) : atoi(prec) + 1;
+    j = (val_i > 0) ? prec : prec + 1;
     while (++i < j)
       tmp->str[i] = str_c[i];
   }
-  else if (atoi(width) > atoi(prec))
+  else if (width > prec)
   {
-    i = atoi(width);
+    i = width;
     while (--i >= 0)
         tmp->str[i] = ' ';
     str_c = get_s_p(val, prec);
-    i = atoi(width);
-    j = (atoi(val) >= 0) ? atoi(prec) : atoi(prec) + 1;
+    i = width;
+    j = (val_i >= 0) ? prec : prec + 1;
     while (--j >= 0)
       tmp->str[--i] = str_c[j];
   }
-  else if (atoi(width) <= atoi(prec))
+  else if (width <= prec)
   {
     str_c = ft_strdup(tmp->str);
     free(tmp->str);
-    i = (atoi(val) > 0) ? atoi(prec) : atoi(prec) + 1;
+    i = (val_i > 0) ? prec : prec + 1;
     tmp->str = malloc(i + 1);
     tmp->str[i] = '\0';
     
@@ -144,14 +146,14 @@ else if (atoi(prec) >= 0)
     {
       tmp->str[--i] = val[j];
     }
-    if (atoi(val) < 0)
+    if (val_i < 0)
       tmp->str = neg_nbr(tmp->str);
   }
 
 
 }
 // end prec
-if (val[0] == '0' && atoi(prec) == 0 && (atoi(width) == 0 || atoi(width) == -1))
+if (val[0] == '0' && prec == 0 && (width == 0 || width == -1))
 {
   free(tmp->str);
   tmp->str = ft_strdup("");

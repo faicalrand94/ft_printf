@@ -27,6 +27,19 @@ typedef struct s_list
   struct s_list *next;
 } t_list;
 
+typedef struct v_list
+{
+  char *flgs;
+  char flg;
+  int width;
+  char *val;
+  int prec;
+  char *str_c;
+  int val_i;
+  unsigned int u_val;
+} vr_list;
+
+
 size_t        ft_strlen(const char *str);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
@@ -48,8 +61,8 @@ void    ft_printf(char *str, ...);
 char	*ft_strdup(const char *s1);
 char *ft_itoa_int16(unsigned int n);
 int		ft_isdigit(int c);
-void str_spf_d(va_list ap, t_list *tmp);
-void str_spf_u(va_list ap, t_list *tmp);
+int str_spf_d(va_list ap, t_list *tmp);
+int str_spf_u(va_list ap, t_list *tmp);
 void str_spf_x(va_list ap, t_list *tmp);
 void str_spf_p(va_list ap, t_list *tmp);
 char *get_s_p(char *val, int prec);
@@ -60,5 +73,8 @@ char cut_flg(char *flgs, int *i);
 void str_spf_s(va_list ap, t_list *tmp);
 char *get_s_p_u(char *val, int prec);
 void	*ft_memset(void *str, int c, size_t n);
+vr_list        *l_lstnew_vrbs();
+int   ft_width(t_list *tmp, vr_list *vrbs);
+void  ft_width_cnt(t_list *tmp, vr_list *vrbs);
 
 #endif

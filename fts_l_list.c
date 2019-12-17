@@ -12,6 +12,18 @@
 
 #include "ft_printf.h"
 
+
+
+vr_list        *l_lstnew_vrbs()
+{
+    vr_list    *node;
+
+    node = (vr_list*)malloc(sizeof(vr_list));
+    return (node);
+}
+
+
+
 t_list    *ft_lstlast(t_list *lst)
 {
     t_list    *list;

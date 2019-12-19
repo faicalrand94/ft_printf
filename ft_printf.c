@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:13:31 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/11/21 17:13:35 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/19 21:21:30 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,78 +21,63 @@ char  *to_up(char *str)
     str[i] = ft_toupper(str[i]);
   return (str);
 }
-void str_spf_c(va_list ap, t_list *tmp)
-{
-  char *flgs;
-  char flg;
-  char *width;
-  //char *prec;
-  int i = -1;
-  int a = 0, start;
+// void str_spf_c(va_list ap, t_list *tmp)
+// {  
+//   char *flgs;
+//   char flg;
+//   char *width;
+//   //char *prec;
+//   int i = -1;
+//   int a = 0;
 
-  flgs = tmp->flg;
-  if (flgs[0] == '\0')
-  {
-    tmp->str = ft_itos(va_arg(ap, int));
-    return ;
-  }
-  while (flgs[++i] == '-')
-    flg = '-';
-  start = i;
-  if (flgs[i] == '*')
-    width = ft_strdup("*");
-  else if (ft_isdigit(flgs[i]))
-  {
-    while (ft_isdigit(flgs[i]))
-      i++;
-    width = ft_substr(flgs, start, i - start );  
-  }
-  else
-    width = ft_strdup("\0");
-  if (width[0] == '*' && flg == '-')
-  {
-    a = va_arg(ap, int);
-    if (a < 0)
-      a = a * (-1);
-    tmp->str = malloc(a + 1);
-    tmp->str = memset(tmp->str, ' ', a);
-    tmp->str[0] = (char)va_arg(ap, int);
-  }
-  else if (width[0] == '*')
-  {
+//   flgs = tmp->flg;
+//   flg = cut_flg(flgs, &i);
+//   width = ft_strdup("hello");
+//  // width = cut_width(ap, flgs, &i, &flg);
+//   if (width[0] == '*' && flg == '-')
+//   {
+//     a = va_arg(ap, int);
+//     if (a < 0)
+//       a = a * (-1);
+//     tmp->str = malloc(a + 1);
+//     tmp->str = memset(tmp->str, ' ', a);
+//     tmp->str[0] = (char)va_arg(ap, int);
+//   }
+//   else if (width[0] == '*')
+//   {
 
-    a = va_arg(ap, int);
-    if (a < 0)
-      tmp->str = malloc((-1 * a) + 1);
-    else
-      tmp->str = malloc(a + 1);
-    if (a < 0)
-    {
-      tmp->str = memset(tmp->str, ' ', (-1 * a));
-      tmp->str[0] = (char)va_arg(ap, int);
-    }
-    else
-    {
-      tmp->str = memset(tmp->str, ' ', a);
-      tmp->str[a - 1] = (char)va_arg(ap, int);
-    }
-  }
-  else
-  {
-    if (flg == '\0')
-    {
-      tmp->str = malloc(atoi(width) + 1);
-      tmp->str = memset(tmp->str, ' ', atoi(width));
-      tmp->str[atoi(width) - 1] = (char)va_arg(ap, int);
-    }
-    else if (flg == '-')
-    {
-      tmp->str = malloc(atoi(width) + 1);
-      tmp->str = memset(tmp->str, ' ', atoi(width));
-      tmp->str[0] = (char)va_arg(ap, int);
-    }
-  }
-}
+//     a = va_arg(ap, int);
+//     if (a < 0)
+//       tmp->str = malloc((-1 * a) + 1);
+//     else
+//       tmp->str = malloc(a + 1);
+//     if (a < 0)
+//     {
+//       tmp->str = memset(tmp->str, ' ', (-1 * a));
+//       tmp->str[0] = (char)va_arg(ap, int);
+//     }
+//     else
+//     {
+//       tmp->str = memset(tmp->str, ' ', a);
+//       tmp->str[a - 1] = (char)va_arg(ap, int);
+//     }
+//   }
+//   else
+//   {
+//     if (flg == '\0')
+//     {
+//       tmp->str = malloc(atoi(width) + 1);
+//       tmp->str = memset(tmp->str, ' ', atoi(width));
+//       tmp->str[atoi(width) - 1] = (char)va_arg(ap, int);
+//     }
+//     else if (flg == '-')
+//     {
+//       tmp->str = malloc(atoi(width) + 1);
+//       tmp->str = memset(tmp->str, ' ', atoi(width));
+//       tmp->str[0] = (char)va_arg(ap, int);
+//     }
+//   }
+// }
 
 
 
@@ -110,39 +95,24 @@ void    ft_printf(char *str, ...)
   while (tmp)
   {
     if (tmp->spfx == 's')
-    {
       str_spf_s(ap, tmp);
-    }
     else if (tmp->spfx == 'c')
-    {
       str_spf_c(ap , tmp);
-    }
     else if (tmp->spfx == 'd' || tmp->spfx == 'i')
-    {
       str_spf_d(ap, tmp);
-    }
     else if (tmp->spfx == 'u')
-    {
       str_spf_u(ap, tmp);
-    }
     else if (tmp->spfx == 'p')
-    {
       str_spf_p(ap, tmp);
-    }
-      //tmp->str = ft_itoa_16(va_arg(ap, size_t));
     else if (tmp->spfx == 'x')
-    {
       str_spf_x(ap, tmp);
-    }
-      //tmp->str = ft_itoa_long16(va_arg(ap, long));
     else if (tmp->spfx == 'X')
     {
       str_spf_x(ap, tmp);
       tmp->str = to_up(tmp->str);
     }
-      // tmp->str = to_up(ft_itoa_long16(va_arg(ap, long)));  
     else if (tmp->spfx == '%')
-      tmp->str = strdup("%");
+      str_spf_pct(ap , tmp);
     tmp = tmp->next;
   }
   aff = ob;

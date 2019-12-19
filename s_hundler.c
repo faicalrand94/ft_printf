@@ -12,7 +12,6 @@
 
 #include "ft_printf.h"
 
-
 char *get_s_p_s(char *val, int prec)
 {
   char *str_c;
@@ -27,110 +26,98 @@ char *get_s_p_s(char *val, int prec)
     str_c[i] = val[i];
   return (str_c);
 }
-
-void str_spf_s(va_list ap, t_list *tmp)
+void	ft_width_cnt_str(t_list *tmp, vr_list *vrbs)
 {
-  char *flgs;
-  char flg;
-  int width;
-  char *val;
-  int prec;
-  char *str_c;
-  int i = -1, j;
+	int	i;
+	int	j;
 
-  flgs = tmp->flg;
-  if (flgs[0] == '\0')
+	i = vrbs->width - 1;
+  j = ft_strlen(vrbs->val);
+  if ((int)ft_strlen(vrbs->val) >= vrbs->width && vrbs->prec == -1)
+    while (--j >= 0)
+      tmp->str[j] = vrbs->val[j];
+  else if ((int)ft_strlen(vrbs->val) < vrbs->width && vrbs->flg == '-')
   {
-    tmp->str = va_arg(ap, char*);
-    return ;
+    i = -1;
+    j = 0;
+    while (++i < (int)ft_strlen(vrbs->val))
+      tmp->str[i] = vrbs->val[j++];
   }
+  else if ((int)ft_strlen(vrbs->val) < vrbs->width)
+    while (--j >= 0)
+      tmp->str[i--] = vrbs->val[j];
+}
 
-  flg = cut_flg(flgs, &i);
-  width = cut_width(ap, flgs, &i, &flg);
-  prec = cut_prec(ap, flgs, &i);
-
-  val = va_arg(ap, char*);
-
-  
-  // width
-
-
-if (width != -1)
-{   
-  if ((int)ft_strlen(val) >= width && prec == -1)
+int   ft_width_str(t_list *tmp, vr_list *vrbs)
+{
+	if ((int)ft_strlen(vrbs->val) >= vrbs->width && vrbs->prec == -1)
   {
-    tmp->str = malloc(ft_strlen(val) + 1);
-    tmp->str[ft_strlen(val)] = '\0';
+    tmp->str = malloc(ft_strlen(vrbs->val) + 1);
+    tmp->str[ft_strlen(vrbs->val)] = '\0';
   }
   else
   {
-    tmp->str = malloc(width + 1);
-    tmp->str[width] = '\0';
+    tmp->str = malloc(vrbs->width + 1);
+    tmp->str[vrbs->width] = '\0';
   }
-    (flg == '0') ? memset(tmp->str, '0', width) : memset(tmp->str, ' ', width);
+  ft_memset(tmp->str, ' ', vrbs->width);
+  ft_width_cnt_str(tmp, vrbs);
+  return (1);
+}
 
-  i = width - 1;
-  j = ft_strlen(val) - 1;
-  if ((int)ft_strlen(val) >= width && prec == -1)
-    while (j >= 0)
-    {
-      tmp->str[j] = val[j];
-      j--;
-    }
-  else if ((int)ft_strlen(val) < width && flg == '-')
+static int	ft_prec_cnt_str(t_list *tmp, vr_list *vrbs)
+{
+  int i;
+  int j;
+
+  i = vrbs->width;
+  while (--i >= 0)
+      tmp->str[i] = ' ';
+  vrbs->str_c = get_s_p_s(vrbs->val, vrbs->prec);
+  if (vrbs->flg == '-')
   {
-    i = 0;
-    j = 0;
-    while (i < (int)ft_strlen(val))
-    {
-      tmp->str[i++] = val[j];
-      j++;
-    }
-  }
-  else if ((int)ft_strlen(val) < width)
-    while (j >= 0)
-    {
-      tmp->str[i--] = val[j];
-      j--;
-    }
-}
-//end width
-
-// prec
-if (prec >= 0 && prec > width && width < (int)ft_strlen(val))
-{
-  str_c = get_s_p_s(val, prec);
-  free(tmp->str);
-  tmp->str = str_c;
-}
-else if (flg == '-' && prec >= 0)
-{
-  i = width;
-    while (--i >= 0)
-        tmp->str[i] = ' ';
-    str_c = get_s_p_s(val, prec);
     i = -1;
-    while (++i < (int)ft_strlen(str_c))
-      tmp->str[i] = str_c[i];
-}
-else if (prec >= 0)
-{
-  i = width;
-    while (--i >= 0)
-        tmp->str[i] = ' ';
-    str_c = get_s_p_s(val, prec);
-    i = width;
-    j = ft_strlen(str_c);
+    while (++i < (int)ft_strlen(vrbs->str_c))
+      tmp->str[i] = vrbs->str_c[i];
+  }
+  else
+  {
+    i = vrbs->width;
+    j = ft_strlen(vrbs->str_c);
     while (--j >= 0)
-      tmp->str[--i] = str_c[j];
+    tmp->str[--i] = vrbs->str_c[j];
+  }
+  return (1);
 }
 
-//3
-//1
+int str_spf_s(va_list ap, t_list *tmp)
+{
+  vr_list *vrbs;
+  int i;
 
 
-
-// end prec
-
-
+  i = -1;
+  vrbs = l_lstnew_vrbs();
+  vrbs->flgs = tmp->flg;
+  if (vrbs->flgs[0] == '\0')
+  {
+    tmp->str = va_arg(ap, char*);
+    return (1);
+  }
+  vrbs->flg = cut_flg(vrbs->flgs, &i);
+	vrbs->width = cut_width(ap, vrbs->flgs, &i, &vrbs->flg);
+	vrbs->prec = cut_prec(ap, vrbs->flgs, &i);
+  vrbs->val = va_arg(ap, char*);
+  tmp->str = ft_strdup(vrbs->val);
+  if (vrbs->width != -1)  
+    ft_width_str(tmp, vrbs);
+  if (vrbs->prec >= 0 && vrbs->prec > vrbs->width && vrbs->width < (int)ft_strlen(vrbs->val))
+  {
+    vrbs->str_c = get_s_p_s(vrbs->val, vrbs->prec);
+    free(tmp->str);
+    tmp->str = vrbs->str_c;
+  }
+  else if (vrbs->prec >= 0)
+    ft_prec_cnt_str(tmp, vrbs);
+  return (1);
 }

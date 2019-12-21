@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hundlers_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:35:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/10 16:35:13 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/20 18:36:02 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ int cut_width(va_list ap, char *flgs, int *i, char *flg)
   {
     val = va_arg(ap, int);
     if (val >= 0)
-      width = ft_itoa(val);
+    {
+      if(!(width = ft_itoa(val)))
+        return (-2);
+    }
     else
     {
-      width = ft_itoa(-1 * val);
+      if(!(width = ft_itoa(-1 * val)))
+        return (-2);
       *flg = '-';
     }
     (*i)++;
@@ -57,11 +61,12 @@ int cut_width(va_list ap, char *flgs, int *i, char *flg)
   {
     while (ft_isdigit(flgs[(*i)]))
       (*i)++;
-    width = ft_substr(flgs, start, (*i) - start );  
+    if (!(width = ft_substr(flgs, start, (*i) - start )))
+      return (-2);
   }
   else
-    width = ft_strdup("-1");
-
+    if (!(width = ft_strdup("-1")))
+      return (-2);
     return (ft_atoi(width));
 }
 
@@ -70,13 +75,15 @@ int cut_prec(va_list ap, char *flgs, int *i)
   int start;
   char *prec;
 
-  prec = ft_strdup("0");
+  if (!(prec = ft_strdup("0")))
+    return (-2);
   if (flgs[(*i)] == '.')
   {
     (*i)++;
     if (flgs[(*i)] == '*')
     {
-      prec = ft_itoa(va_arg(ap, int));
+      if (!(prec = ft_itoa(va_arg(ap, int))))
+        return (-2);
       (*i)++;
     }
     else if (ft_isdigit(flgs[(*i)]))
@@ -84,11 +91,13 @@ int cut_prec(va_list ap, char *flgs, int *i)
       start = (*i);
       while (ft_isdigit(flgs[(*i)]))
         (*i)++;
-      prec = ft_substr(flgs, start, (*i) - start );  
+      if (!(prec = ft_substr(flgs, start, (*i) - start)))
+        return (-2);  
     }  
   }
   else if (flgs[(*i)] != '.')
-    prec = ft_strdup("-1");
+    if (!(prec = ft_strdup("-1")))
+      return (-2);
   return (ft_atoi(prec));
 }
 
@@ -121,13 +130,15 @@ char *get_s_p(char *val, int prec)
   str_c = NULL;
   if (atoi(val) > 0)
   {
-    str_c = malloc(prec + 1);
+    if (!(str_c = malloc(prec + 1)))
+      return (NULL);
     str_c[prec] = '\0';
     i = prec;
   }
   else
   {
-    str_c = malloc(prec + 2);
+    if (!(str_c = malloc(prec + 2)))
+      return (NULL);
     str_c[prec + 1] = '\0';
     i = prec + 1;
   }
@@ -149,7 +160,8 @@ char *get_s_p_u(char *val, int prec)
   int j;
 
   str_c = NULL;
-  str_c = malloc(prec + 1);
+  if (!(str_c = malloc(prec + 1)))
+    return (NULL);
   str_c[prec] = '\0';
   i = prec;
   while (--i >= 0)

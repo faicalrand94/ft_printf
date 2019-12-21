@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fts_l_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:26:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/01 15:26:13 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/20 18:18:32 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ vr_list        *l_lstnew_vrbs()
 {
     vr_list    *node;
 
-    node = (vr_list*)malloc(sizeof(vr_list));
+    if (!(node = (vr_list*)malloc(sizeof(vr_list))))
+        return (NULL);
+    node->prec = -1;
     return (node);
 }
 

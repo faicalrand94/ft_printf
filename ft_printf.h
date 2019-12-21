@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:33:42 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/19 21:19:10 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/20 19:05:42 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct v_list
   size_t st_val;
 } vr_list;
 
-
+int    ft_printf(char *str, ...);
 size_t        ft_strlen(const char *str);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
@@ -58,7 +58,6 @@ void    ft_lstadd_back(t_list **alst, t_list *new);
 t_list        *l_lstnew(char *str,char *spfx, char *flg);
 int get_spf(int pos, char* str);
 void get_ob(char *str, t_list **ob);
-void    ft_printf(char *str, ...);
 char	*ft_strdup(const char *s1);
 char *ft_itoa_int16(unsigned int n);
 int		ft_isdigit(int c);
@@ -74,12 +73,13 @@ char *get_s_p_u(char *val, int prec);
 void	*ft_memset(void *str, int c, size_t n);
 vr_list        *l_lstnew_vrbs();
 int   ft_width(t_list *tmp, vr_list *vrbs);
-void  ft_width_cnt(t_list *tmp, vr_list *vrbs);
+int  ft_width_cnt(t_list *tmp, vr_list *vrbs);
 char *get_s_p(char *val, int prec);
 int str_spf_s(va_list ap, t_list *tmp);
 int str_spf_c(va_list ap, t_list *tmp);
 int   ft_width_str(t_list *tmp, vr_list *vrbs);
 void	ft_width_cnt_str(t_list *tmp, vr_list *vrbs);
 int	str_spf_pct(va_list ap, t_list *tmp);
+char *get_s_p_s(char *val, int prec);
 
 #endif

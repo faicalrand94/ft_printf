@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   x_hundler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:54:39 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/13 17:54:47 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/21 14:39:47 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int str_spf_x(va_list ap, t_list *tmp)
   vrbs->flgs = tmp->flg;
   if (vrbs->flgs[0] == '\0')
   {
-    tmp->str = ft_itoa((unsigned int)va_arg(ap, unsigned int));
+    tmp->str = ft_itoa_int16((unsigned int)va_arg(ap, unsigned int));
     return (1);
   }
   vrbs->flg = cut_flg(vrbs->flgs, &i);

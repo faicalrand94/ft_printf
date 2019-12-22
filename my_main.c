@@ -3,11 +3,12 @@
 int  main()
 {
 
-int a,b;
+char a,b;
 
-a = ft_printf("%x\n", 100);
-b = printf("%x\n", 100);
+a = ft_printf("Bla bla %03%");
+b = printf("Bla bla %03%");
 
-printf("%d\n%d", a, b);
+
+printf("%d\n%d\n\n\n", a, b);
     return 0;
 }

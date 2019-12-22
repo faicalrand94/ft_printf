@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:30:53 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 22:59:13 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/22 17:20:06 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_prec_cnt2(t_list *tmp, vr_list *vrbs)
 	if (!(vrbs->str_c = ft_strdup(tmp->str)))
 		return (0);
 	free(tmp->str);
-	i = (vrbs->val_i > 0) ? vrbs->prec : vrbs->prec + 1;
+	i = (vrbs->val_i >= 0) ? vrbs->prec : vrbs->prec + 1;
 	if (!(tmp->str = malloc(i + 1)))
 		return (0);
 	tmp->str[i] = '\0';

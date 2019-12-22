@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:55:18 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 22:56:56 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/22 14:49:35 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,29 @@ int	str_spf_c(va_list ap, t_list *tmp)
 	if (!(vrbs = l_lstnew_vrbs()))
 		return (0);
 	vrbs->flgs = tmp->flg;
+	vrbs->flg = cut_flg(vrbs->flgs, &i);
+	if ((vrbs->width = cut_width(ap, vrbs->flgs, &i, &vrbs->flg)) == -2)
+		return (0);
 	if (!(vrbs->val = (char*)malloc(sizeof(char) * 2)))
 		return (0);
-	vrbs->val[0] = (char)va_arg(ap, int);
+	if ((vrbs->val_i = va_arg(ap, int)) == 0 && vrbs->flg == '-')
+	{
+		tmp->valn = 'P';
+		
+	}
+	else if (vrbs->val_i == 0)
+		tmp->valn = 'N';
+	vrbs->val[0] = vrbs->val_i;
 	vrbs->val[1] = '\0';
 	if (vrbs->flgs[0] == '\0')
 	{
 		tmp->str = vrbs->val;
 		return (1);
 	}
-	vrbs->flg = cut_flg(vrbs->flgs, &i);
-	if ((vrbs->width = cut_width(ap, vrbs->flgs, &i, &vrbs->flg)) == -2)
-		return (0);
 	
 	if (!(tmp->str = ft_strdup(vrbs->val)))
 		return (0);
-	if (vrbs->width != -1)  
+	if (vrbs->width != -1)
 		if (!(ft_width_str(tmp, vrbs)))
 			return (0);
 	return (1);

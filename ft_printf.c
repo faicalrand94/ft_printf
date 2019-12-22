@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:13:31 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 22:09:04 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/22 15:06:59 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,26 @@ int    ft_printf(char *str, ...)
 
   while (aff)
   {
-    rtp += ft_strlen(aff->str);
-    ft_putstr(aff->str);
+    if (aff->valn == 'P')
+    { 
+      ft_putchar(0);
+      ft_putstr(aff->str + 1);
+      rtp += (((int)ft_strlen(aff->str) - 1) < 0) ? ft_strlen(aff->str) : ft_strlen(aff->str) - 1;
+      rtp++;
+    }
+    else if (aff->valn == 'N')
+    { 
+      aff->str[ft_strlen(aff->str) - 1] = '\0';
+      ft_putstr(aff->str);
+      ft_putchar(0);
+      rtp += ft_strlen(aff->str);
+      rtp++;
+    }
+    else
+    {
+      ft_putstr(aff->str);
+      rtp += ft_strlen(aff->str);
+    }
     aff = aff->next;
   }
   return (rtp);

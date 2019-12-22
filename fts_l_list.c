@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:26:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 18:18:32 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/21 21:30:38 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_list        *l_lstnew(char *str,char *spfx, char *flg)
     node->str = str;
     node->spfx = spfx[0];
     node->flg = flg;
+    node->valn = 1;
     node->next = NULL;
     return (node);
 }

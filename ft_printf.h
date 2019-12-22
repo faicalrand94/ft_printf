@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:33:42 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 19:05:42 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/21 21:29:41 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
   char  *str;
   char  spfx;
   char  *flg;
+  char  valn;
   struct s_list *next;
 } t_list;
 

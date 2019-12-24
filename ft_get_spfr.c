@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_spfr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:25:07 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/01 15:25:09 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 18:23:38 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int get_spf(int pos, char* str)
     i = 0;
     pos++;
   }
-  
-  
+  free(s);
   return (0);
   
 }

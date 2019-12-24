@@ -6,13 +6,11 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:26:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/21 21:30:38 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 18:22:14 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
 
 vr_list        *l_lstnew_vrbs()
 {
@@ -20,6 +18,9 @@ vr_list        *l_lstnew_vrbs()
 
     if (!(node = (vr_list*)malloc(sizeof(vr_list))))
         return (NULL);
+    node->val = NULL;
+    node->str_c = NULL;
+    node->flgs = NULL;
     node->prec = -1;
     return (node);
 }
@@ -52,11 +53,38 @@ t_list        *l_lstnew(char *str,char *spfx, char *flg)
 {
     t_list    *node;
 
-    node = (t_list*)malloc(sizeof(t_list));
+    if (!(node = (t_list*)malloc(sizeof(t_list))))
+        return (NULL);
     node->str = str;
     node->spfx = spfx[0];
+    free(spfx);
     node->flg = flg;
     node->valn = 1;
     node->next = NULL;
     return (node);
+}
+
+void	free_vrbs(vr_list *vrbs)
+{
+	if (vrbs->val)
+		free(vrbs->val);
+	if (vrbs->str_c)
+		free(vrbs->str_c);
+	free(vrbs);
+}
+
+void free_obb(t_list *ob)
+{
+  t_list *f;
+
+  if ((f = ob))
+    ob = ob->next;
+  while (f)
+  {
+    free(f->flg);
+    free(f->str);
+    free(f);
+    if ((f = ob))
+      ob = ob->next;
+  }
 }

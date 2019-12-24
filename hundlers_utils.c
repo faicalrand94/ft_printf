@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:35:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 18:36:02 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 15:04:28 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int cut_width(va_list ap, char *flgs, int *i, char *flg)
   else
     if (!(width = ft_strdup("-1")))
       return (-2);
-    return (ft_atoi(width));
+    val = ft_atoi(width);
+    free(width);
+    return (val);
 }
 
 int cut_prec(va_list ap, char *flgs, int *i)
@@ -81,7 +83,8 @@ int cut_prec(va_list ap, char *flgs, int *i)
   {
     (*i)++;
     if (flgs[(*i)] == '*')
-    {
+    { 
+      free(prec);
       if (!(prec = ft_itoa(va_arg(ap, int))))
         return (-2);
       (*i)++;
@@ -91,14 +94,20 @@ int cut_prec(va_list ap, char *flgs, int *i)
       start = (*i);
       while (ft_isdigit(flgs[(*i)]))
         (*i)++;
+      free(prec);
       if (!(prec = ft_substr(flgs, start, (*i) - start)))
         return (-2);  
     }  
   }
   else if (flgs[(*i)] != '.')
+  {
+    free(prec);
     if (!(prec = ft_strdup("-1")))
       return (-2);
-  return (ft_atoi(prec));
+  }
+  start = ft_atoi(prec);
+  free(prec);
+  return (start);
 }
 
 char  *neg_nbr(char *str)

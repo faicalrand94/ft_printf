@@ -21,49 +21,57 @@ static char hex_chr(int i)
   return (i + '0');
 }
 
-static char *ft_i16(int *mod,unsigned int div, int i)
+static char *ft_i16(char *mod,unsigned int div, int i)
 {
-  char *str;
+  char *strr;
   int j;
   int k;
   
   
   k = (div > 0) ? div : -1 * div;
   j = 0;
-  str = malloc(sizeof(char) * (i + 2));
-  str[i + 1] = '\0';
-  str[j++] = hex_chr(k);
+  if (!(strr = malloc(sizeof(char) * (i + 2))))
+    return (NULL);
+  strr[i + 1] = '\0';
+  strr[j++] = hex_chr(k);
   k = i - 1;
   while (i--)
   {
-    str[j] = hex_chr(mod[k]);
+    strr[j] = hex_chr((int)mod[k] - 33);
     k--;
     j++;
-  
   }
-  return (str);
+  free(mod);
+  return (strr);
 }
 
 char *ft_itoa_int16(unsigned int n)
 {
-  int i = 0, j = 0, *mod;
+  int i;
+  int j;
+  char *mod;
   unsigned int div;
+  char *s;
 
+  i = 0;
+  j = 0;
   div = n;
   while (div >= 16)
   {
     div = div / 16;
     i++;
   }
-  mod = malloc(sizeof(int) * i);
-  
+  if (!(mod = malloc((sizeof(char) * i) + 1)))
+    return (NULL);
+  mod[i] = '\0';
   div = (n > 0) ? n : -1 * n;
   while (div >= 16)
   {
-    mod[j] = div % 16;
+    mod[j] = (div % 16) + 33;
     div = div / 16;
     j++;
   }
- 
-  return (ft_i16(mod, div, i));
+  s = ft_strdup(mod);
+  free(mod);
+  return (ft_i16(s, div, i));
 }

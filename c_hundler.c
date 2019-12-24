@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:55:18 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/22 14:49:35 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/23 23:27:37 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int	str_spf_c(va_list ap, t_list *tmp)
 	if (vrbs->width != -1)
 		if (!(ft_width_str(tmp, vrbs)))
 			return (0);
+	free_vrbs(vrbs);
 	return (1);
 }

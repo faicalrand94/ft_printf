@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:13:31 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/22 15:06:59 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 21:01:07 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char  *to_up(char *str)
     str[i] = ft_toupper(str[i]);
   return (str);
 }
+
 
 int    ft_printf(char *str, ...)
 { 
@@ -103,5 +104,6 @@ int    ft_printf(char *str, ...)
     }
     aff = aff->next;
   }
+  free_obb(ob);
   return (rtp);
 }

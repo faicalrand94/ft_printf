@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 22:09:23 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/20 19:00:50 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 16:00:53 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ int   ft_width(t_list *tmp, vr_list *vrbs)
 {
 	if ((int)ft_strlen(vrbs->val) >= vrbs->width)
 	{
+		free(tmp->str);
 		if (!(tmp->str = malloc(ft_strlen(vrbs->val) + 1)))
 			return (0);
 		tmp->str[ft_strlen(vrbs->val)] = '\0';
 	}
 	else
 	{
+		free(tmp->str);
 		if (!(tmp->str = malloc(vrbs->width + 1)))
 			return (0);
 		tmp->str[vrbs->width] = '\0';

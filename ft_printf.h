@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:33:42 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/21 21:29:41 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/23 23:24:55 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ int   ft_width_str(t_list *tmp, vr_list *vrbs);
 void	ft_width_cnt_str(t_list *tmp, vr_list *vrbs);
 int	str_spf_pct(va_list ap, t_list *tmp);
 char *get_s_p_s(char *val, int prec);
+void	free_vrbs(vr_list *vrbs);
+void free_obb(t_list *ob);
 
 #endif

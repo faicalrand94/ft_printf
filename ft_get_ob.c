@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_ob.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:22:23 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/01 15:22:26 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/23 23:23:42 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void get_ob(char *str, t_list **ob)
     if(str[i + 1] == '%' || str[i + 1] == '\0' || str[i] == '%')
     {
       if ((str[i + 1] == '%' || str[i + 1] == '\0') && str[i] != '%')
-        ft_lstadd_back(ob, l_lstnew(ft_substr(str, start, i - start + 1), strdup("\0"), strdup("\0")));
+        ft_lstadd_back(ob, l_lstnew(ft_substr(str, start, i - start + 1), ft_strdup("\0"), ft_strdup("\0")));
       // if (str[i + 1] == '%' || str[i] == '%')
       // {
         if (str[i] == '%')

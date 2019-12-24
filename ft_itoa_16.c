@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_16.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:20:22 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/01 15:20:25 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 20:30:19 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char hex_chr(int i)
   return (i + '0');
 }
 
-static char *ft_i16(int *mod, int n, int i)
+static char *ft_i16(char *mod, int n, int i)
 {
   char *str;
   int j;
@@ -29,24 +29,29 @@ static char *ft_i16(int *mod, int n, int i)
   
   k = 0;
   j = 0;
-  str = malloc(sizeof(char) * (i + 2));
+  if (!(str = malloc(sizeof(char) * (i + 2))))
+    return (NULL);
   str[i + 1] = '\0';
   str[j++] = hex_chr(n);
   k = i - 1;
   while (i--)
   {
-    str[j] = hex_chr(mod[k]);
+    str[j] = hex_chr((int)mod[k] - 33);
     k--;
     j++;
   
   }
+  free(mod);
   return (str);
 }
 
 char *ft_itoa_16(size_t n)
 {
-  int i = 0, j = 0, *mod;
+  int i = 0;
+  int j = 0;
+  char *mod;
   size_t div;
+  char *s;
 
   div = n;
   while (div >= 16)
@@ -54,15 +59,16 @@ char *ft_itoa_16(size_t n)
     div = div / 16;
     i++;
   }
-  mod = malloc(sizeof(int) * i);
-  
-  
+  if (!(mod = malloc((sizeof(char) * i) + 1)))
+    return (NULL);
+  mod[i] = '\0';
   while (n >= 16)
   {
-    mod[j] = n % 16;
+    mod[j] = (n % 16) + 33;
     n = n / 16;
     j++;
   }
- 
-  return (ft_i16(mod, n, i));
+  s = ft_strdup(mod);
+  free(mod);
+  return (ft_i16(s, n, i));
 }

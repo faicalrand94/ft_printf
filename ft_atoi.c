@@ -6,7 +6,7 @@
 /*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 00:54:54 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/16 00:54:57 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/25 18:37:59 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ int				ft_atoi(const char *str)
 			break ;
 	return ((int)(res * sign));
 }
-

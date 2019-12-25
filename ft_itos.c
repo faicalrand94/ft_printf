@@ -6,20 +6,20 @@
 /*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:31:34 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/01 15:31:36 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/25 18:56:21 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *ft_itos(int i)
+char	*ft_itos(int i)
 {
-  char c;
-  char *str;
+	char c;
+	char *str;
 
-  c = (char)i;
-  str = (char*)malloc(sizeof(char) * 2);
-  str[0] = c;
-  str[1] = '\0';
-  return (str);
+	c = (char)i;
+	str = (char*)malloc(sizeof(char) * 2);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }

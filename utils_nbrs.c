@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 22:09:23 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/24 16:00:53 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/25 22:52:27 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_width_cnt(t_list *tmp, vr_list *vrbs)
 	return (1);
 }
 
-int   ft_width(t_list *tmp, vr_list *vrbs)
+int	ft_width(t_list *tmp, vr_list *vrbs)
 {
 	if ((int)ft_strlen(vrbs->val) >= vrbs->width)
 	{
@@ -54,8 +54,11 @@ int   ft_width(t_list *tmp, vr_list *vrbs)
 			return (0);
 		tmp->str[vrbs->width] = '\0';
 	}
-	(vrbs->flg == '0') ? ft_memset(tmp->str, '0', vrbs->width) : ft_memset(tmp->str, ' ', vrbs->width);
+	if (vrbs->flg == '0')
+		ft_memset(tmp->str, '0', vrbs->width);
+	else
+		ft_memset(tmp->str, ' ', vrbs->width);
 	if (!(ft_width_cnt(tmp, vrbs)))
 		return (0);
-  return (1);
+	return (1);
 }

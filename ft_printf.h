@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:33:42 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/23 23:24:55 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/25 23:17:57 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ t_list    *ft_lstlast(t_list *lst);
 void    ft_lstadd_back(t_list **alst, t_list *new);
 t_list        *l_lstnew(char *str,char *spfx, char *flg);
 int get_spf(int pos, char* str);
-void get_ob(char *str, t_list **ob);
+void get_node(char *str, t_list **node);
 char	*ft_strdup(const char *s1);
-char *ft_itoa_int16(unsigned int n);
+char *ft_itoa_int16(unsigned int n, int i, int j);
 int		ft_isdigit(int c);
 int str_spf_d(va_list ap, t_list *tmp);
 int str_spf_u(va_list ap, t_list *tmp);

@@ -6,13 +6,22 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:16:56 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/24 15:30:45 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/24 21:31:02 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	str_spf_pct(va_list ap, t_list *tmp)
+static	int	norme_help(t_list *tmp, vr_list *vrbs)
+{
+	if (vrbs->width != -1)
+		if (!(ft_width_str(tmp, vrbs)))
+			return (0);
+	free_vrbs(vrbs);
+	return (1);
+}
+
+int			str_spf_pct(va_list ap, t_list *tmp)
 {
 	vr_list	*vrbs;
 	int		i;
@@ -36,9 +45,7 @@ int	str_spf_pct(va_list ap, t_list *tmp)
 		return (0);
 	if (!(tmp->str = ft_strdup(vrbs->val)))
 		return (0);
-	if (vrbs->width != -1)  
-		if (!(ft_width_str(tmp, vrbs)))
-			return (0);
-	free_vrbs(vrbs);
+	if (!norme_help(tmp, vrbs))
+		return (0);
 	return (1);
 }

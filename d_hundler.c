@@ -6,16 +6,16 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:30:53 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/24 21:02:59 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/25 18:33:28 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_prec_cnt(t_list *tmp, vr_list *vrbs)
+int			ft_prec_cnt(t_list *tmp, vr_list *vrbs)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = vrbs->width;
 	while (--i >= 0)
@@ -32,17 +32,14 @@ int		ft_prec_cnt(t_list *tmp, vr_list *vrbs)
 	else
 	{
 		i = vrbs->width;
-    while (--j >= 0)
-      tmp->str[--i] = vrbs->str_c[j];
+		while (--j >= 0)
+			tmp->str[--i] = vrbs->str_c[j];
 	}
 	return (1);
 }
 
-int		ft_prec_cnt2(t_list *tmp, vr_list *vrbs)
+int			ft_prec_cnt2(t_list *tmp, vr_list *vrbs, int i, int j)
 {
-	int i;
-	int j;
-
 	if ((int)ft_strlen(vrbs->val) > vrbs->prec)
 	{
 		i = -1;
@@ -59,7 +56,6 @@ int		ft_prec_cnt2(t_list *tmp, vr_list *vrbs)
 	if (!(tmp->str = malloc(i + 1)))
 		return (0);
 	tmp->str[i] = '\0';
-	j = -1;
 	while (++j < i)
 		tmp->str[j] = '0';
 	j = ft_strlen(vrbs->val);
@@ -71,7 +67,32 @@ int		ft_prec_cnt2(t_list *tmp, vr_list *vrbs)
 	return (1);
 }
 
-int		ft_prec(vr_list *vrbs, t_list *tmp)
+static	int	norme_prec_d(vr_list *vrbs, t_list *tmp)
+{
+	if ((int)ft_strlen(vrbs->val) > vrbs->prec)
+	{
+		if (!(ft_prec_cnt2(tmp, vrbs, 0, -1)))
+			return (0);
+	}
+	else if (vrbs->flg == '-' && vrbs->width > vrbs->prec)
+	{
+		if (!(ft_prec_cnt(tmp, vrbs)))
+			return (0);
+	}
+	else if (vrbs->width > vrbs->prec)
+	{
+		if (!(ft_prec_cnt(tmp, vrbs)))
+			return (0);
+	}
+	else if (vrbs->width <= vrbs->prec)
+	{
+		if (!(ft_prec_cnt2(tmp, vrbs, 0, -1)))
+			return (0);
+	}
+	return (1);
+}
+
+int			ft_prec(vr_list *vrbs, t_list *tmp)
 {
 	int i;
 
@@ -83,29 +104,11 @@ int		ft_prec(vr_list *vrbs, t_list *tmp)
 	}
 	else if (vrbs->prec >= 0)
 	{
-		if ((int)ft_strlen(vrbs->val) > vrbs->prec)
-		{
-			if (!(ft_prec_cnt2(tmp, vrbs)))
-				return (0);
-		}
-		else if (vrbs->flg == '-' && vrbs->width > vrbs->prec)
-		{
-			if (!(ft_prec_cnt(tmp, vrbs)))
-				return (0);
-		}
-		else if (vrbs->width > vrbs->prec)
-		{
-			if (!(ft_prec_cnt(tmp, vrbs)))
-				return (0);
-		}
-		else if (vrbs->width <= vrbs->prec)
-		{
-			if (!(ft_prec_cnt2(tmp, vrbs)))
-				return (0);
-		}
+		if (!(norme_prec_d(vrbs, tmp)))
+			return (0);
 	}
 	if (vrbs->val[0] == '0' && vrbs->prec == 0 &&
-		   	(vrbs->width == 0 || vrbs->width == -1))
+			(vrbs->width == 0 || vrbs->width == -1))
 	{
 		free(tmp->str);
 		if (!(tmp->str = ft_strdup("")))
@@ -114,7 +117,23 @@ int		ft_prec(vr_list *vrbs, t_list *tmp)
 	return (1);
 }
 
-int		str_spf_d(va_list ap, t_list *tmp)
+static	int	norme_help(t_list *tmp, vr_list *vrbs)
+{
+	if (!(vrbs->val = ft_itoa(vrbs->val_i)))
+		return (0);
+	if (!(tmp->str = ft_strdup(vrbs->val)))
+		return (0);
+	if (vrbs->width != -1)
+		if (!(ft_width(tmp, vrbs)))
+			return (0);
+	if (vrbs->prec != -1)
+		if (!(ft_prec(vrbs, tmp)))
+			return (0);
+	free_vrbs(vrbs);
+	return (1);
+}
+
+int			str_spf_d(va_list ap, t_list *tmp)
 {
 	vr_list	*vrbs;
 	int		i;
@@ -135,16 +154,7 @@ int		str_spf_d(va_list ap, t_list *tmp)
 	if ((vrbs->prec = cut_prec(ap, vrbs->flgs, &i)) == -2)
 		return (0);
 	vrbs->val_i = va_arg(ap, int);
-	if (!(vrbs->val = ft_itoa(vrbs->val_i)))
+	if (!(norme_help(tmp, vrbs)))
 		return (0);
-	if (!(tmp->str = ft_strdup(vrbs->val)))
-		return (0);
-	if (vrbs->width != -1)
-		if (!(ft_width(tmp, vrbs)))
-			return (0);
-	if (vrbs->prec != -1)
-		if (!(ft_prec(vrbs, tmp)))
-			return (0);
-	free_vrbs(vrbs);
 	return (1);
 }

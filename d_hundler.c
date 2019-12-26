@@ -6,13 +6,13 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:30:53 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 18:27:54 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:50:04 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int	norme_help(t_list *tmp, vr_list *vrbs)
+static	int	norme_help(t_list *tmp, t_vrs *vrbs)
 {
 	if (!(vrbs->val = ft_itoa(vrbs->val_i)))
 		return (0);
@@ -30,11 +30,12 @@ static	int	norme_help(t_list *tmp, vr_list *vrbs)
 
 int			str_spf_d(va_list ap, t_list *tmp)
 {
-	vr_list	*vrbs;
+	t_vrs	*vrbs;
 	int		i;
 
 	i = -1;
-	vrbs = l_lstnew_vrbs();
+	if (!(vrbs = l_lstnew_vrbs()))
+		return (0);
 	vrbs->flgs = tmp->flg;
 	if (vrbs->flgs[0] == '\0')
 	{

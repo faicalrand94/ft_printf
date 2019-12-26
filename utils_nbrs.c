@@ -6,13 +6,13 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 22:09:23 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 22:52:27 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:52:51 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_width_cnt(t_list *tmp, vr_list *vrbs)
+int	ft_width_cnt(t_list *tmp, t_vrs *vrbs)
 {
 	int	i;
 	int	j;
@@ -38,7 +38,7 @@ int	ft_width_cnt(t_list *tmp, vr_list *vrbs)
 	return (1);
 }
 
-int	ft_width(t_list *tmp, vr_list *vrbs)
+int	ft_width(t_list *tmp, t_vrs *vrbs)
 {
 	if ((int)ft_strlen(vrbs->val) >= vrbs->width)
 	{

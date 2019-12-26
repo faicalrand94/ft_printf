@@ -6,17 +6,17 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:26:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 17:42:37 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:54:14 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-vr_list	*l_lstnew_vrbs(void)
+t_vrs	*l_lstnew_vrbs(void)
 {
-	vr_list	*node;
+	t_vrs	*node;
 
-	if (!(node = (vr_list*)malloc(sizeof(vr_list))))
+	if (!(node = (t_vrs*)malloc(sizeof(t_vrs))))
 		return (NULL);
 	node->val = NULL;
 	node->str_c = NULL;

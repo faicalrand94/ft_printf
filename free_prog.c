@@ -6,13 +6,13 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 17:42:18 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 17:43:46 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:55:56 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	free_vrbs(vr_list *vrbs)
+void	free_vrbs(t_vrs *vrbs)
 {
 	if (vrbs->val)
 		free(vrbs->val);

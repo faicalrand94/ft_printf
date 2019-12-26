@@ -6,13 +6,13 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 18:31:12 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 18:34:31 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:51:11 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int	ft_prec_cnt(t_list *tmp, vr_list *vrbs)
+static	int	ft_prec_cnt(t_list *tmp, t_vrs *vrbs)
 {
 	int i;
 	int j;
@@ -38,7 +38,7 @@ static	int	ft_prec_cnt(t_list *tmp, vr_list *vrbs)
 	return (1);
 }
 
-static	int	ft_prec_cnt2(t_list *tmp, vr_list *vrbs, int i, int j)
+static	int	ft_prec_cnt2(t_list *tmp, t_vrs *vrbs, int i, int j)
 {
 	if ((int)ft_strlen(vrbs->val) > vrbs->prec)
 	{
@@ -65,7 +65,7 @@ static	int	ft_prec_cnt2(t_list *tmp, vr_list *vrbs, int i, int j)
 	return (1);
 }
 
-static	int	norme_prec_u(vr_list *vrbs, t_list *tmp)
+static	int	norme_prec_u(t_vrs *vrbs, t_list *tmp)
 {
 	if ((int)ft_strlen(vrbs->val) > vrbs->prec)
 	{
@@ -90,7 +90,7 @@ static	int	norme_prec_u(vr_list *vrbs, t_list *tmp)
 	return (1);
 }
 
-int			ft_prec_u(vr_list *vrbs, t_list *tmp, int i)
+int			ft_prec_u(t_vrs *vrbs, t_list *tmp, int i)
 {
 	if (vrbs->u_val == 0 && vrbs->prec == 0)
 	{

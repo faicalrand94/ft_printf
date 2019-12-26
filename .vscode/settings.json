@@ -1,6 +1,6 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "ft_printf.h": "c"
+        "ft_printf.h": "c",
+        "printf.h": "c"
     }
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbouibao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 00:54:54 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 18:37:59 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 19:07:52 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static	int		helper(const char *str, int *sign)
 {

@@ -6,13 +6,13 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:43:14 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 15:16:03 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:51:57 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_prec_cnt_str(t_list *tmp, vr_list *vrbs)
+static int	ft_prec_cnt_str(t_list *tmp, t_vrs *vrbs)
 {
 	int i;
 	int j;
@@ -38,7 +38,7 @@ static int	ft_prec_cnt_str(t_list *tmp, vr_list *vrbs)
 	return (1);
 }
 
-static	int	norme_help(t_list *tmp, vr_list *vrbs)
+static	int	norme_help(t_list *tmp, t_vrs *vrbs)
 {
 	if (!(tmp->str = ft_strdup(vrbs->val)))
 		return (0);
@@ -63,7 +63,7 @@ static	int	norme_help(t_list *tmp, vr_list *vrbs)
 
 int			str_spf_s(va_list ap, t_list *tmp)
 {
-	vr_list	*vrbs;
+	t_vrs	*vrbs;
 	int		i;
 
 	i = -1;

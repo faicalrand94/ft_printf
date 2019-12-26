@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:27:17 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 19:00:02 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:28:07 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (start > strlen(s))
+	if (start > ft_strlen(s))
 		len = 0;
 	if (!(str = (char*)malloc(len + 1)))
 		return (NULL);

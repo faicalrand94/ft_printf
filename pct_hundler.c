@@ -6,13 +6,13 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:16:56 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/24 21:31:02 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 20:50:40 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int	norme_help(t_list *tmp, vr_list *vrbs)
+static	int	norme_help(t_list *tmp, t_vrs *vrbs)
 {
 	if (vrbs->width != -1)
 		if (!(ft_width_str(tmp, vrbs)))
@@ -23,7 +23,7 @@ static	int	norme_help(t_list *tmp, vr_list *vrbs)
 
 int			str_spf_pct(va_list ap, t_list *tmp)
 {
-	vr_list	*vrbs;
+	t_vrs	*vrbs;
 	int		i;
 
 	i = -1;

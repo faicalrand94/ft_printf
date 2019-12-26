@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:33:42 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 23:17:57 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 18:37:43 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,10 @@ int	str_spf_pct(va_list ap, t_list *tmp);
 char *get_s_p_s(char *val, int prec);
 void	free_vrbs(vr_list *vrbs);
 void free_obb(t_list *ob);
+int		rmpl_node(va_list ap, t_list *node);
+int		fct_aff(t_list *node);
+int			ft_prec_d(vr_list *vrbs, t_list *tmp);
+int         ft_prec_u(vr_list *vrbs, t_list *tmp, int i);
+int	ft_prec_x(vr_list *vrbs, t_list *tmp);
 
 #endif

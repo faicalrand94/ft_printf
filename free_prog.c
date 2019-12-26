@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   free_prog.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 17:13:31 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 15:17:58 by fbouibao         ###   ########.fr       */
+/*   Created: 2019/12/26 17:42:18 by fbouibao          #+#    #+#             */
+/*   Updated: 2019/12/26 17:43:46 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(char *str, ...)
+void	free_vrbs(vr_list *vrbs)
 {
-	va_list	ap;
-	t_list	*node;
-	int		rtp;
+	if (vrbs->val)
+		free(vrbs->val);
+	if (vrbs->str_c)
+		free(vrbs->str_c);
+	free(vrbs);
+}
 
-	node = NULL;
-	get_node(str, &node);
-	va_start(ap, str);
-	if (!(rmpl_node(ap, node)))
-		return (-1);
-	rtp = fct_aff(node);
-	free_obb(node);
-	return (rtp);
+void	free_obb(t_list *ob)
+{
+	t_list *f;
+
+	if ((f = ob))
+		ob = ob->next;
+	while (f)
+	{
+		free(f->flg);
+		free(f->str);
+		free(f);
+		if ((f = ob))
+			ob = ob->next;
+	}
 }

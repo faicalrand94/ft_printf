@@ -6,16 +6,16 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:25:07 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 23:25:27 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 15:42:28 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int get_spf(int pos, char* str)
+int		get_spf(int pos, char *str)
 {
-	int i;  
-	char *s;
+	int		i;
+	char	*s;
 
 	i = 0;
 	s = ft_strdup("cspdiuxX%");
@@ -35,5 +35,4 @@ int get_spf(int pos, char* str)
 	}
 	free(s);
 	return (0);
-
 }

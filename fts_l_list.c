@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:26:11 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 19:07:02 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/26 17:42:37 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,4 @@ t_list	*l_lstnew(char *str, char *spfx, char *flg)
 	node->valn = 1;
 	node->next = NULL;
 	return (node);
-}
-
-void	free_vrbs(vr_list *vrbs)
-{
-	if (vrbs->val)
-		free(vrbs->val);
-	if (vrbs->str_c)
-		free(vrbs->str_c);
-	free(vrbs);
-}
-
-void	free_obb(t_list *ob)
-{
-	t_list *f;
-
-	if ((f = ob))
-		ob = ob->next;
-	while (f)
-	{
-		free(f->flg);
-		free(f->str);
-		free(f);
-		if ((f = ob))
-			ob = ob->next;
-	}
 }

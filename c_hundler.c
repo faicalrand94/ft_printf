@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:55:18 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 20:49:50 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/29 18:07:45 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			str_spf_c(va_list ap, t_list *tmp)
 		return (0);
 	vrbs->flgs = tmp->flg;
 	vrbs->flg = cut_flg(vrbs->flgs, &i);
-	if ((vrbs->width = cut_width(ap, vrbs->flgs, &i, &vrbs->flg)) == -2)
+	if (!(cut_width(ap, vrbs, &i)))
 		return (0);
 	if (!(vrbs->val = (char*)malloc(sizeof(char) * 2)))
 		return (0);

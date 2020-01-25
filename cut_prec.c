@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 22:16:29 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/25 22:30:05 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/29 20:38:18 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,24 @@ static	int	norme_help(va_list ap, char **prec, char *flgs, int *i)
 	return (1);
 }
 
-int			cut_prec(va_list ap, char *flgs, int *i)
+int			cut_prec(va_list ap, t_vrs *vrbs, int *i)
 {
-	int		start;
-	char	*prec;
+	char	*pr;
 
-	if (!(prec = ft_strdup("0")))
-		return (-2);
-	if (flgs[(*i)] == '.')
+	if (!(pr = ft_strdup("0")))
+		return (0);
+	if (vrbs->flgs[(*i)] == '.')
 	{
-		if (!(norme_help(ap, &prec, flgs, i)))
-			return (-2);
+		if (!(norme_help(ap, &pr, vrbs->flgs, i)))
+			return (0);
 	}
-	else if (flgs[(*i)] != '.')
+	else if (vrbs->flgs[(*i)] != '.')
 	{
-		free(prec);
-		if (!(prec = ft_strdup("-1")))
-			return (-2);
+		free(pr);
+		if (!(pr = ft_strdup("-1")))
+			return (0);
 	}
-	start = ft_atoi(prec);
-	free(prec);
-	return (start);
+	vrbs->prec = ft_atoi(pr);
+	free(pr);
+	return (1);
 }

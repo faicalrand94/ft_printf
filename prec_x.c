@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 18:35:05 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 20:51:34 by fbouibao         ###   ########.fr       */
+/*   Updated: 2020/01/25 03:44:54 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ static	int	ft_prec_cnt(t_list *tmp, t_vrs *vrbs)
 	return (1);
 }
 
-static	int	ft_prec_cnt2(t_list *tmp, t_vrs *vrbs)
+static	int	ft_prec_cnt2(t_list *tmp, t_vrs *vrbs, int i, int j)
 {
-	int i;
-	int j;
-
 	if ((int)ft_strlen(vrbs->val) > vrbs->prec)
 	{
 		i = -1;
@@ -57,7 +54,8 @@ static	int	ft_prec_cnt2(t_list *tmp, t_vrs *vrbs)
 	free(tmp->str);
 	i = vrbs->prec;
 	if (!(tmp->str = malloc(i + 1)))
-		tmp->str[i] = '\0';
+		return (0);
+	tmp->str[i] = '\0';
 	j = -1;
 	while (++j < i)
 		tmp->str[j] = '0';
@@ -71,7 +69,7 @@ static	int	norme_prec_x(t_vrs *vrbs, t_list *tmp)
 {
 	if ((int)ft_strlen(vrbs->val) > vrbs->prec)
 	{
-		if (!(ft_prec_cnt2(tmp, vrbs)))
+		if (!(ft_prec_cnt2(tmp, vrbs, 0, 0)))
 			return (0);
 	}
 	else if (vrbs->flg == '-' && vrbs->width > vrbs->prec)
@@ -86,7 +84,7 @@ static	int	norme_prec_x(t_vrs *vrbs, t_list *tmp)
 	}
 	else if (vrbs->width <= vrbs->prec)
 	{
-		if (!(ft_prec_cnt2(tmp, vrbs)))
+		if (!(ft_prec_cnt2(tmp, vrbs, 0, 0)))
 			return (0);
 	}
 	return (1);

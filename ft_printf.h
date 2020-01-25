@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:33:42 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 20:54:26 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:58:24 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int					str_spf_u(va_list ap, t_list *tmp);
 int					str_spf_x(va_list ap, t_list *tmp);
 int					str_spf_p(va_list ap, t_list *tmp);
 char				*neg_nbr(char *str);
-int					cut_prec(va_list ap, char *flgs, int *i);
-int					cut_width(va_list ap, char *flgs, int *i, char *flg);
+int					cut_prec(va_list ap, t_vrs *vrbs, int *i);
+int					cut_width(va_list ap, t_vrs *vrbs, int *i);
 char				cut_flg(char *flgs, int *i);
 char				*get_s_p_u(char *val, int prec);
 void				*ft_memset(void *str, int c, size_t n);

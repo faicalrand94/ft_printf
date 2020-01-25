@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:30:53 by fbouibao          #+#    #+#             */
-/*   Updated: 2019/12/26 20:50:04 by fbouibao         ###   ########.fr       */
+/*   Updated: 2019/12/29 18:06:01 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int			str_spf_d(va_list ap, t_list *tmp)
 		return (1);
 	}
 	vrbs->flg = cut_flg(vrbs->flgs, &i);
-	if ((vrbs->width = cut_width(ap, vrbs->flgs, &i, &vrbs->flg)) == -2)
+	if (!(cut_width(ap, vrbs, &i)))
 		return (0);
-	if ((vrbs->prec = cut_prec(ap, vrbs->flgs, &i)) == -2)
+	if (!(cut_prec(ap, vrbs, &i)))
 		return (0);
 	vrbs->val_i = va_arg(ap, int);
 	if (!(norme_help(tmp, vrbs)))
